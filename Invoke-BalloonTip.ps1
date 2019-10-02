@@ -6,6 +6,9 @@
     .Description
         This function displays a user-defined message as a balloon popup in the system tray. This function
         requires Windows Vista or later.
+    
+    .Parameter ToolTip
+        The notifycation's icon tooltip. Keep it short and simple.
 
     .Parameter Message
         The message text you want to display.  Recommended to keep it short and simple.
