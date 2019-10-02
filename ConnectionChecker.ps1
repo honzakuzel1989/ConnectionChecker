@@ -16,17 +16,20 @@ Param(
   [int]$NotificationDuration=0
 )
 
-# Set up from scriptts directory and required functions
-$scriptsloc = "."
-$reqfiles = @("Invoke-BalloonTip.ps1", "Create-Icon.ps1")
-
-# Load required functions from scriptts directory
-foreach($reqfile in $reqfiles){
-  Write-Verbose "Loading file $scriptsloc\$reqfile"
-  . ("$scriptsloc\$reqfile")
-}
-
 try{
+  # Set up from scriptts directory and required functions
+  $scriptsloc = "."
+  $reqfiles = @("Invoke-BalloonTip.ps1", "Create-Icon.ps1")
+  
+  # Load required functions from scriptts directory
+  foreach($reqfile in $reqfiles){
+    Write-Verbose "Loading file $scriptsloc\$reqfile"
+    . ("$scriptsloc\$reqfile")
+  }
+
+  # --
+  Write-Host "$(Get-Date): Enter"
+
   # Ping last state and baloon data
   $lastping = $null
   $btitle = "Connection checker"
@@ -47,9 +50,14 @@ try{
     if(!($ping -eq $lastping)){
       # Success
       if($ping) { 
+        # --
+        Write-Host "$(Get-Date): Connected"
         Invoke-BalloonTip -Title $btitle -Duration $bduration -MessageType "Info"  -Message "You have required connectivity" -SysTrayIconPath $ConnectedIconPath 
       }
+      # Failure
       else { 
+        # --
+        Write-Host "$(Get-Date): Disconnected"
         Invoke-BalloonTip -Title $btitle -Duration $bduration -MessageType "Error" -Message "You have NOT required connectivity"  -SysTrayIconPath $DisconnectedIconPath  
       }
     }
@@ -65,4 +73,7 @@ finally{
   # Close and dispose icon
   Close-BalloonTip
   #Dispose-BalloonTip
+  
+  # --
+  Write-Host "$(Get-Date): Exit"
 }
