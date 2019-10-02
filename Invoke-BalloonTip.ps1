@@ -36,7 +36,10 @@
 
     [CmdletBinding()]
     Param (
-        [Parameter(Mandatory=$True,HelpMessage="The message text to display. Keep it short and simple.")]
+        [Parameter(HelpMessage="The notifycation's icon tooltip. Keep it short and simple.")]
+        [string]$ToolTip,
+    
+        [Parameter(HelpMessage="The message text to display. Keep it short and simple.")]
         [string]$Message,
 
         [Parameter(HelpMessage="The message title")]
@@ -60,6 +63,7 @@
     #Extract the icon from the file
     $balloon.Icon = Create-Icon($SysTrayIconPath)
     $balloon.Visible = $true
+    $balloon.Text = $ToolTip
   
     #Display the tip and specify in milliseconds on how long balloon will stay visible
     If ($Duration -gt 0) { 

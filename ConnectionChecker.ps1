@@ -52,13 +52,13 @@ try{
       if($ping) { 
         # --
         Write-Host "$(Get-Date): Connected"
-        Invoke-BalloonTip -Title $btitle -Duration $bduration -MessageType "Info"  -Message "You have required connectivity" -SysTrayIconPath $ConnectedIconPath 
+        Invoke-BalloonTip -Title $btitle -Duration $bduration -MessageType "Info"  -Message "You have required connectivity" -SysTrayIconPath $ConnectedIconPath -ToolTip $Address
       }
       # Failure
       else { 
         # --
         Write-Host "$(Get-Date): Disconnected"
-        Invoke-BalloonTip -Title $btitle -Duration $bduration -MessageType "Error" -Message "You have NOT required connectivity"  -SysTrayIconPath $DisconnectedIconPath  
+        Invoke-BalloonTip -Title $btitle -Duration $bduration -MessageType "Error" -Message "You have NOT required connectivity"  -SysTrayIconPath $DisconnectedIconPath -ToolTip $Address
       }
     }
     
